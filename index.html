@@ -125,7 +125,7 @@
         msg += "&LED_Strip_Effect_Sta=" + Number(LED_Strip_Effect_Sta) + "&LED_Strip_Effect=" + LED_Strip_Effect;
         msg += "&No_Marble_Effect_Sta=" + Number(No_Marble_Effect_Sta) + "&No_Marble_Effect_Eff=" + No_Marble_Effect_Eff;
         
-        Send("set", msg);
+        PostRequest(msg);
       }
 
       // Function to get saved settings from the server.
@@ -219,6 +219,18 @@
         }
         xmlhttp.open("GET", "settings?" + msg, true);
         xmlhttp.send();
+      }
+      function PostRequest(msg) {
+        if (window.XMLHttpRequest) {
+          // code for IE7+, Firefox, Chrome, Opera, Safari
+          xmlhttp = new XMLHttpRequest();
+        } else {
+          // code for IE6, IE5
+          xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+	xmlhttp.open('POST', 'https://jonathanwoodhams.github.io', true);
+	xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	xmlhttp.send(msg);
       }
     </script>
   </body>
